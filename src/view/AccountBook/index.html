@@ -1,0 +1,26 @@
+{{template "head.html"}}
+<h1>账本</h1>
+<h3>我的账本</h3>
+<ul>
+    <li>占无数据</li>
+</ul>
+<script>
+    if (sessionStorage.getItem('user')) {
+        var user = JSON.parse(sessionStorage.getItem('user'));
+        var p = $http.get('/accountBook/selectUserContactAccountBook', {
+            params: {
+                userId: user.id,
+            }
+        });
+        p.then((data) => {
+            if (Array.isArray(data)) {
+                console.log(data);
+                // var lis = data.map(function(item) {
+                //     return '<li>'+ item.userName + '</li>';
+                // });
+                // $('#userList').html(lis);
+            }
+        });
+    }
+</script>
+{{template "footer.html" }}
