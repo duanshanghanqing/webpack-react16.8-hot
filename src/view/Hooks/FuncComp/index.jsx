@@ -26,7 +26,7 @@ export default (props) => {
 
 
   // 二：第二个参数有，并且是空数组。
-  // 适合做事件绑定和卸载
+  // 适合做事件绑定和卸载，初始化请求服务端获取数据
   useEffect(() => {
     console.log('componentDidMount[第一次渲染后]');
     const handle = () => console.log('click event');
