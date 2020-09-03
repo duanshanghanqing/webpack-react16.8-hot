@@ -9,7 +9,18 @@ class ClassComp extends React.Component {
   }
 
   componentDidMount() {
+    const { count } = this.state;
+    if (count % 2 === 0) {
+      console.log(count);
+    }
+  }
 
+  // 视图被更新重新render触发
+  componentDidUpdate() {
+    const { count } = this.state;
+    if (count % 2 === 0) {
+      console.log(count);
+    }
   }
 
   render() {

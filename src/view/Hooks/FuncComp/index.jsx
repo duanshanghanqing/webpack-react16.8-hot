@@ -11,45 +11,47 @@ export default (props) => {
   // useState返回一对值：当前的状态（state value）[状态名称]和一个可以更新状态的函数[状态函数]。
   const [count, setCount] = useState(0);// useState唯一的参数就是初始状态（initial state）
 
-  /*
-  // 声明多个状态变量！
-  const [age, setAge] = useState(42);
-  const [fruit, setFruit] = useState('banana');
-  const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
-  */
+  const [disable, setDisable] = useState(false);
 
-  // 类似于 componentDidMount 和 componentDidUpdate:
-  // 当你调用useEffect,就是告诉React在刷新DOM之后运行你的副作用函数。
-  // 副作用函数在组件中声明，所以可以使用组件的状态（state）和属性（props）。
-  // React默认在每一次渲染后运行副作用函数——包括第一次渲染。
+  // 一：第二个参数有，并且不是空数组。可以是 状态(state),也可以是属性(props)
+  // 组件实例化后执行第一次执行， 相当于 componentDidMount
+  // 当 第二个参数 变化后，return 后的函数 成了参数“更新前”触发，相当于 componentWillUpdate(nextProps, nextState)
+  // () => {} 成了“完成更新后”触发，相当于 componentDidUpdate(prevProps, prevState)
   useEffect(() => {
-    // 使用浏览器API更新文档标题
-    document.title = `你点击了 ${count} 次`;
-    console.log(props);
-    // 当组件被卸载时，React会在由随后的渲染引起的副作用函数运行之前调用，初始化不执行
+    console.log('componentDidMount[第一次渲染后] || componentDidUpdate[完成更新后]', count);
     return () => {
-      console.log('取消订阅');
+      console.log('componentWillUpdate[更新前] || componentWillUnmount[卸载前]', count);
+    };
+  }, [count]);// 代表能够引起副作用执行的依赖, 只有 count 变化才会触发副作用
+
+
+  // 二：第二个参数有，并且是空数组。
+  // 适合做事件绑定和卸载
+  useEffect(() => {
+    console.log('componentDidMount[第一次渲染后]');
+    const handle = () => console.log('click event');
+    document.addEventListener('click', handle);
+    return () => {
+      console.log('componentWillUnmount[卸载前]');
+      document.removeEventListener('click', handle);
+    };
+  }, []);
+
+
+  // 三：没有第二个参数时
+  // 相当与监听全局的副作用，状态变化会触发,属性变化会触发，组件挂载卸载会触发
+  // 业务里面最好不用
+  useEffect(() => {
+    console.log('componentDidMount[第一次渲染后] || componentDidUpdate[完成更新后]', count, props.number);
+    return () => {
+      console.log('componentWillUpdate[更新前] || componentWillUnmount[卸载前]', count, props.number);
     };
   });
 
 
-  /*
-  // https://zh-hans.reactjs.org/docs/hooks-reference.html#useeffect
-  useEffect(() => {
-      // 订阅
-      const subscription = props.source.subscribe();
-      return () => {
-        // 取消订阅
-        subscription.unsubscribe();
-      };
-    },
-    // 现在，只有在props.source更改时才能重新创建订阅。
-    [props.source],
-  );
-  */
-
   return (
     <div>
+      <button type="button" onClick={() => { setDisable(!disable); }}>{disable ? '启用' : '禁用'}</button>
       <p>
         你点击了
         {count}

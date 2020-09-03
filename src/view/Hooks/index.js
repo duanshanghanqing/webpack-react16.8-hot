@@ -7,18 +7,15 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      visible: true,
+      number: 0,
     };
   }
 
   render() {
+    const { visible, number } = this.state;
     return (
       <div>
-        <h3>class组件</h3>
-        <ClassComp />
-        <br />
-        <h3>函数组件</h3>
-        <FuncComp />
-        <br />
         <h4>useContext 最佳实践</h4>
         <ContextApp />
         <br />
@@ -26,8 +23,14 @@ export default class extends React.Component {
         <h4>class 组件</h4>
         <ClassComp />
 
-        <h4>函数 组件</h4>
-        <FuncComp />
+        <h4>
+          函数 组件
+          <button type="button" onClick={() => { this.setState({ visible: !visible }); }}>{visible ? '隐藏' : '显示'}</button>
+          <button type="button" onClick={() => { this.setState({ number: number + 1 }); }}>{number}</button>
+        </h4>
+        {
+          visible && <FuncComp number={number} />
+        }
       </div>
     );
   }
