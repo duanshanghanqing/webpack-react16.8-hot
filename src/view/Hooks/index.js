@@ -21,6 +21,13 @@ export default class extends React.Component {
         <br />
         <h4>useContext 最佳实践</h4>
         <ContextApp />
+        <br />
+
+        <h4>class 组件</h4>
+        <ClassComp />
+
+        <h4>函数 组件</h4>
+        <FuncComp />
       </div>
     );
   }
