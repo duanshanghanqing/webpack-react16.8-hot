@@ -1,5 +1,6 @@
 import React from 'react';
-import Main from './Main';
+import ClassComp from './ClassComp';
+import FuncComp from './FuncComp';
 import ContextApp from './ContextApp';
 
 export default class extends React.Component {
@@ -12,8 +13,11 @@ export default class extends React.Component {
   render() {
     return (
       <div>
-        <Main title="钩子函数" />
+        <h3>class组件</h3>
+        <ClassComp />
         <br />
+        <h3>函数组件</h3>
+        <FuncComp />
         <br />
         <h4>useContext 最佳实践</h4>
         <ContextApp />
