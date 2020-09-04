@@ -5,6 +5,7 @@ import Counter from '../view/Counter';
 import NewFeatures from '../view/NewFeatures';
 import IifeCycle from '../view/IifeCycle';
 import Hooks from '../view/Hooks';
+import CustomHooks from '../view/CustomHooks';
 import Context from '../view/Context';
 import PureComponent from '../view/PureComponent';
 import PureComponentDemo1 from '../view/PureComponent/Demo1';
@@ -24,26 +25,37 @@ export default [
       },
       {
         path: '/about',
+        exact: true,
         component: About,
       },
       {
         path: '/counter',
+        exact: true,
         component: Counter,
       },
       {
         path: '/newfeatures',
+        exact: true,
         component: NewFeatures,
       },
       {
         path: '/iifecycle',
+        exact: true,
         component: IifeCycle,
       },
       {
         path: '/hooks',
+        exact: true,
         component: Hooks,
       },
       {
+        path: '/customHooks',
+        exact: true,
+        component: CustomHooks,
+      },
+      {
         path: '/context/:id',
+        exact: true,
         component: Context,
       },
       {
@@ -52,10 +64,12 @@ export default [
         routes: [
           {
             path: '/pureComponent/demo1',
+            exact: true,
             component: PureComponentDemo1,
           },
           {
             path: '/pureComponent/demo2',
+            exact: true,
             component: PureComponentDemo2,
           },
         ],

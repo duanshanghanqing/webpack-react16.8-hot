@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class extends React.Component {
   constructor(props) {
@@ -6,6 +7,10 @@ export default class extends React.Component {
   }
 
   render() {
-    return <div>home</div>;
+    return (
+      <div>
+        <Link to="/about">About</Link>
+      </div>
+    );
   }
 }
