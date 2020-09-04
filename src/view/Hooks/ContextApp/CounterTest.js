@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { myContext } from './reducer';
 
 function CounterTest() {
-  // 取出在 myContext.Provider 设置的Context value 值
+  // 这里取处 <myContext.Provider value={{ state, dispatch, initialCount }}> 上传的值
   const { state, dispatch, initialCount } = useContext(myContext);
+
   return (
     <div>
       CounterTest Count:

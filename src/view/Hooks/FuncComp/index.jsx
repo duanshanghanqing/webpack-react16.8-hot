@@ -13,50 +13,59 @@ export default (props) => {
 
   const [disable, setDisable] = useState(false);
 
-  // 一：第二个参数有，并且不是空数组。可以是 状态(state),也可以是属性(props)
+  // 一：第二个参数有，并且不是空数组。可以是 状态(state),也可以是属性(props)，即 局部副作用
   // 组件实例化后执行第一次执行， 相当于 componentDidMount
   // 当 第二个参数 变化后，return 后的函数 成了参数“更新前”触发，相当于 componentWillUpdate(nextProps, nextState)
   // () => {} 成了“完成更新后”触发，相当于 componentDidUpdate(prevProps, prevState)
   useEffect(() => {
-    console.log('componentDidMount[第一次渲染后] || componentDidUpdate[完成更新后]', count);
+    console.log('[count]，componentDidMount[第一次渲染后] || componentDidUpdate[完成更新后]', count);
     return () => {
-      console.log('componentWillUpdate[更新前] || componentWillUnmount[卸载前]', count);
+      console.log('[count]，componentWillUpdate[更新前] || componentWillUnmount[卸载前]', count);
     };
   }, [count]);// 代表能够引起副作用执行的依赖, 只有 count 变化才会触发副作用
 
 
-  // 二：第二个参数有，并且是空数组。
+  // 二：第二个参数有，并且是空数组。组件安装和卸载时触发，即 一次性 副作用
   // 适合做事件绑定和卸载，初始化请求服务端获取数据
   useEffect(() => {
-    console.log('componentDidMount[第一次渲染后]');
+    console.log('[]，componentDidMount[第一次渲染后]');
     const handle = () => console.log('click event');
     document.addEventListener('click', handle);
     return () => {
-      console.log('componentWillUnmount[卸载前]');
+      console.log('[]，componentWillUnmount[卸载前]');
       document.removeEventListener('click', handle);
     };
   }, []);
 
 
-  // 三：没有第二个参数时
+  // 三：没有第二个参数时，即全局副作用
   // 相当与监听全局的副作用，状态变化会触发,属性变化会触发，组件挂载卸载会触发
   // 业务里面最好不用
   useEffect(() => {
-    console.log('componentDidMount[第一次渲染后] || componentDidUpdate[完成更新后]', count, props.number);
+    console.log('null，componentDidMount[第一次渲染后] || componentDidUpdate[完成更新后]', count, props.number);
     return () => {
-      console.log('componentWillUpdate[更新前] || componentWillUnmount[卸载前]', count, props.number);
+      console.log('null，componentWillUpdate[更新前] || componentWillUnmount[卸载前]', count, props.number);
     };
   });
 
 
   return (
     <div>
-      <button type="button" onClick={() => { setDisable(!disable); }}>{disable ? '启用' : '禁用'}</button>
+      <div>
+        测试其他状态变化对 useEffect 影响
+        {/* 状态变化只会被 全局副作用 监听 */}
+        <button type="button" onClick={() => { setDisable(!disable); }}>{disable ? '启用' : '禁用'}</button>
+      </div>
+
+
       <p>
+        {' '}
         你点击了
         {count}
+        {' '}
         次
       </p>
+      {/* 状态变化只会被 “全局” 和 “局部” 副作用 监听 */}
       <button type="button" onClick={() => setCount(count + 1)}>
         Click me
       </button>
