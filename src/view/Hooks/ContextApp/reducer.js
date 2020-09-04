@@ -18,10 +18,10 @@ function reducer(state, action) {
 }
 
 
-const myContext = React.createContext();
+export const myContext = React.createContext();
 
 // 函数式组件
-const ContextProvider = (props) => {
+export const ContextProvider = (props) => {
   // 设置初始化属性
   const { initialCount = 0 } = props;
 
@@ -34,10 +34,9 @@ const ContextProvider = (props) => {
 
   return (
     // 设置 state, dispatch, initialCount 参数作为 Context 值，向下传递
+    // 生产者
     <myContext.Provider value={{ state, dispatch, initialCount }}>
       {props.children}
     </myContext.Provider>
   );
 };
-
-export { reducer, myContext, ContextProvider };

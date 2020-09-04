@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 
+/*
 // useReducer中第三个参数
 function init({ initialCount = 0, initUserInfo = {} }) {
   return { count: initialCount, userInfo: initUserInfo };
@@ -20,6 +21,9 @@ function reducer(state, action) {
       return state;
   }
 }
+*/
+// 一般封装在一个文件里
+import { init, reducer } from './store';
 
 export default function (props) {
   JSON.stringify(props);
