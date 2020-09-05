@@ -6,6 +6,7 @@ import NewFeatures from '../view/NewFeatures';
 import IifeCycle from '../view/IifeCycle';
 import Hooks from '../view/Hooks';
 import CustomHooks from '../view/CustomHooks';
+import UseRef from '../view/UseRef';
 import Context from '../view/Context';
 import PureComponent from '../view/PureComponent';
 import PureComponentDemo1 from '../view/PureComponent/Demo1';
@@ -52,6 +53,11 @@ export default [
         path: '/customHooks',
         exact: true,
         component: CustomHooks,
+      },
+      {
+        path: '/useRef',
+        exact: true,
+        component: UseRef,
       },
       {
         path: '/context/:id',
