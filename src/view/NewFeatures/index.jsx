@@ -27,7 +27,7 @@ export default class extends React.Component {
       });
     }, 500);
   }
-  
+
   componentWillUnmount() {
     window.clearInterval(this.numSetInterval);
   }
