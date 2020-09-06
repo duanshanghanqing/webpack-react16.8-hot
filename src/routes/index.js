@@ -7,9 +7,8 @@ import IifeCycle from '../view/IifeCycle';
 import Hooks from '../view/Hooks';
 import UseState from '../view/Hooks/UseState';
 import CustomHooks from '../view/Hooks/CustomHooks';
-import UseRef from '../view/Hooks/UseRef';
 import UseCallbackUseMemo from '../view/Hooks/UseCallbackUseMemo';
-import UseImperativeHandle from '../view/Hooks/UseImperativeHandle';
+import UseRefUseImperativeHandle from '../view/Hooks/UseRefUseImperativeHandle';
 import UseLayoutEffect from '../view/Hooks/UseLayoutEffect';
 import Context from '../view/Context';
 import PureComponent from '../view/PureComponent';
@@ -63,19 +62,14 @@ export default [
             component: CustomHooks,
           },
           {
-            path: '/hooks/useRef',
-            exact: true,
-            component: UseRef,
-          },
-          {
             path: '/hooks/useCallbackUseMemo',
             exact: true,
             component: UseCallbackUseMemo,
           },
           {
-            path: '/hooks/useImperativeHandle',
+            path: '/hooks/useRefUseImperativeHandle',
             exact: true,
-            component: UseImperativeHandle,
+            component: UseRefUseImperativeHandle,
           },
           {
             path: '/hooks/useLayoutEffect',

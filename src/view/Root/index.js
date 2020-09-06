@@ -1,6 +1,7 @@
 import React from 'react';
 // import { Switch, Redirect } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import Header from '../../components/Header';
 import './index.less';
 
 class Root extends React.Component {
@@ -16,6 +17,7 @@ class Root extends React.Component {
     // console.log(match);
     return (
       <>
+        <Header />
         {renderRoutes(route.routes)}
       </>
     );

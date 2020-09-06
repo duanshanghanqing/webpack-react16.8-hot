@@ -10,13 +10,18 @@ export default function UseCallbackUseMemo() {
   const [otherCount, setOtherCount] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    const countSetInterval = setInterval(() => {
       setCount((count) => count + 1);
     }, 1000);
 
-    setInterval(() => {
+    const otherCountSetInterval = setInterval(() => {
       setOtherCount((otherCount) => otherCount + 1);
     }, 50);
+
+    return () => {
+      window.clearInterval(countSetInterval);
+      window.clearInterval(otherCountSetInterval);
+    };
   }, []);
   console.log('更新...'); // 会一直打印，说明组件在一直渲染。
 

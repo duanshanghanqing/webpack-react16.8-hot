@@ -49,7 +49,15 @@ export default () => (
     {'  '}
     <NavLink exact to="/iifecycle" activeClassName="selected" activeStyle={{ color: 'red' }}>IifeCycle</NavLink>
     {'  '}
-    <NavLink exact to="/hooks" activeClassName="selected" activeStyle={{ color: 'red' }}>Hooks</NavLink>
+    <NavLink exact to="/hooks/useState" activeClassName="selected" activeStyle={{ color: 'red' }}>Hooks-useState</NavLink>
+    {'  '}
+    <NavLink exact to="/hooks/customHooks" activeClassName="selected" activeStyle={{ color: 'red' }}>Hooks-customHooks</NavLink>
+    {'  '}
+    <NavLink exact to="/hooks/useCallbackUseMemo" activeClassName="selected" activeStyle={{ color: 'red' }}>Hooks-useCallbackUseMemo</NavLink>
+    {'  '}
+    <NavLink exact to="/hooks/useRefUseImperativeHandle" activeClassName="selected" activeStyle={{ color: 'red' }}>Hooks-useRef-useImperativeHandle</NavLink>
+    {'  '}
+    <NavLink exact to="/hooks/useLayoutEffect" activeClassName="selected" activeStyle={{ color: 'red' }}>Hooks-useLayoutEffect</NavLink>
     {'  '}
     <NavLink
       exact
