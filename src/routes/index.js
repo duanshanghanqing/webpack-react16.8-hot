@@ -5,9 +5,12 @@ import Counter from '../view/Counter';
 import NewFeatures from '../view/NewFeatures';
 import IifeCycle from '../view/IifeCycle';
 import Hooks from '../view/Hooks';
-import CustomHooks from '../view/CustomHooks';
-import UseRef from '../view/UseRef';
-import UseCallbackUseMemo from '../view/UseCallbackUseMemo';
+import UseState from '../view/Hooks/UseState';
+import CustomHooks from '../view/Hooks/CustomHooks';
+import UseRef from '../view/Hooks/UseRef';
+import UseCallbackUseMemo from '../view/Hooks/UseCallbackUseMemo';
+import UseImperativeHandle from '../view/Hooks/UseImperativeHandle';
+import UseLayoutEffect from '../view/Hooks/UseLayoutEffect';
 import Context from '../view/Context';
 import PureComponent from '../view/PureComponent';
 import PureComponentDemo1 from '../view/PureComponent/Demo1';
@@ -47,23 +50,39 @@ export default [
       },
       {
         path: '/hooks',
-        exact: true,
         component: Hooks,
-      },
-      {
-        path: '/customHooks',
-        exact: true,
-        component: CustomHooks,
-      },
-      {
-        path: '/useRef',
-        exact: true,
-        component: UseRef,
-      },
-      {
-        path: '/useCallbackUseMemo',
-        exact: true,
-        component: UseCallbackUseMemo,
+        routes: [
+          {
+            path: '/hooks/useState',
+            exact: true,
+            component: UseState,
+          },
+          {
+            path: '/hooks/customHooks',
+            exact: true,
+            component: CustomHooks,
+          },
+          {
+            path: '/hooks/useRef',
+            exact: true,
+            component: UseRef,
+          },
+          {
+            path: '/hooks/useCallbackUseMemo',
+            exact: true,
+            component: UseCallbackUseMemo,
+          },
+          {
+            path: '/hooks/useImperativeHandle',
+            exact: true,
+            component: UseImperativeHandle,
+          },
+          {
+            path: '/hooks/useLayoutEffect',
+            exact: true,
+            component: UseLayoutEffect,
+          },
+        ],
       },
       {
         path: '/context/:id',

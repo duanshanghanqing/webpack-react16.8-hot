@@ -1,6 +1,7 @@
 import React from 'react';
 import Demonstration from './Demonstration';
 
+// 组件生命周期
 export default class extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +12,7 @@ export default class extends React.Component {
 
   setTitle = () => {
     this.setState({
-      title: `演示组件${new Date().getTime()}`,
+      title: `更新后title${new Date().getTime()}`,
     });
   }
 

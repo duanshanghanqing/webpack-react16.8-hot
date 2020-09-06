@@ -11,16 +11,46 @@ class Demonstration extends React.Component {
     };
   }
 
-  // 装载:
-  // 组件实例化后和接受新属性或属性发生变化时将会调用getDerivedStateFromProps。它应该返回一个对象来更新状态，或者返回null来表明新属性不需要更新任何状态
-  // 更新:
-  // 调用 this.setState() 会触发该方法,
-  static getDerivedStateFromProps(nextProps, prevState) {
+
+  // 16.0前的写法，过时不用
+  // 将要装载，在render之前调用；
+  // componentWillMount() {
+  //   console.log('componentWillMount 将要装载，在render之前调用,可以在服务端被调用，也可以在浏览器端被调用；');
+  // }
+  // UNSAFE_componentWillMount()
+
+
+  // 16.0前的写法，过时不用
+  /*
+  // 更新调用:
+  // Props 变化触发
+  componentWillReceiveProps(nextProps) {
+    const { Title } = this.state;
+    if (nextProps.title !== Title) {
+      // 更新state
+      // 可以调内部其他方法
+      this.setState({ Title: nextProps.title });
+      // this._doAsyncOperation();
+    }
+  }
+  // UNSAFE_componentWillReceiveProps(nextProps){
+  // }
+  */
+
+  // 16.0后的写法，推荐用法
+  // 装载 + 更新 都调用:
+  // 只监听 Props 变化触发
+  // 组件实例化后和接收新属性或属性发生变化时将会调用getDerivedStateFromProps。
+  // 是属性和当前组件内部状态比较，它应返回一个要更新状态的对象来更新状态，或者返回
+  // null来表示属性不需要更新任何状态
+  static getDerivedStateFromProps(nextProps, prevState) { // 更新的Props，之前的旧的State。返回新的State
     console.log('装载-[static getDerivedStateFromProps(nextProps, prevState)]-2');
     console.log('更新-[static getDerivedStateFromProps(nextProps, prevState)]-5');
     console.log(nextProps, prevState);
-    // 观察 Title 属性的变化，来跟新内部状态
+    // 观察 Props Title 属性的变化，来更新内部状态
     if (nextProps.title !== prevState.Title) {
+      // 更新state
+      // 不可以调内部其他方法，componentDidUpdate(prevProps, prevState) {}方法中更新状态
       return {
         Title: nextProps.title,
       };
@@ -28,47 +58,51 @@ class Demonstration extends React.Component {
     return null;
   }
 
-  // 装载:
-  // componentDidMount()紧跟在组件装载后（被插入树中）调用。可以立即调用setState()
-  componentDidMount() {
-    console.log('装载-[componentDidMount()]-4');
-    this.setState({
-      list: ['react', 'vue', 'ng'],
-    });
-  }
-
   // 更新:
-  // 比较即将下一下要更新的 state 和 当前 state 是否相同，相同就不更新视图，不相同更新，从而提升性能
+  // 比较 新的 nextProps 和当前state 是否相同，或 ，设置即将更新的 nextState 和 当前 state 比较是否相同，
+  // 相同就不更新视图，不相同更新，从而提升性能
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('更新-[static shouldComponentUpdate(nextProps, nextState)]-6');
-    console.log(nextProps, nextState, this.state);
-    // 这里知识方便比较，应该用不可变数据结构
+    console.log('更新-[shouldComponentUpdate(nextProps, nextState)]-6');
+    console.log('即将更新的props', nextProps, '   当前的props', this.props, '    即将更新的state', nextState, '   当前的state', this.state);
+    // 这里只是方便比较，应该用不可变数据结构
     if (JSON.stringify(nextState) === JSON.stringify(this.state)) {
-      return false;
+      return false;// 不更新
     }
-    return true;
+    return true; // 更新
   }
 
   // 更新:
-  // 在最新的渲染输出提交给DOM前 将 会立即调用。它让你的组件能在当前的值可能要改变前获得它们。这一生命周期返回的任何值将会 作为参数被传递给componentDidUpdate()。
+  // 在render之前调用，state已更新
+  // 典型场景：获取render之前的dom状态，https://blog.csdn.net/wust_cyl/article/details/84306393
+  // 在最新的渲染输出提交给DOM前 将 会立即调用。它让你的组件能在当前的值可能要改变前获得它们。
+  // 这一生命周期返回的任何值将会 作为参数被传递给componentDidUpdate()。
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log('更新-[getSnapshotBeforeUpdate(prevProps, prevState)]-8');
-    console.log(prevProps, prevState);
+    console.log('上一次的值-[getSnapshotBeforeUpdate(prevProps, prevState)]-8');
+    console.log('上一次的值props', prevProps, '    上一次的值state', prevState);
     return 1;
   }
 
-  // 更新:
+  // 更新完成后触发:
   // 紧跟在更新发生后调用。对于初次的渲染，该方法并不会调用。
   // 若shouldComponentUpdate()返回false，componentDidUpdate()将不会被调用。
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('更新-[componentDidUpdate(prevProps, prevState, snapshot)]-9');
+    console.log('上一次的值-[componentDidUpdate(prevProps, prevState, snapshot)]-9');
     // snapshot: 为 getSnapshotBeforeUpdate() 方法返回的值
-    console.log(prevProps, prevState, snapshot);
+    console.log(
+      '上一次的值props', prevProps, '   更新后的props', this.props,
+      '    上一次的值state', prevState, '   更新后的state', this.state,
+      '    getSnapshotBeforeUpdate返回的值', snapshot,
+    );
 
-    // 可以调用 setState(), 须把它包裹在一个条件中,
-    // if (this.props.userID !== prevProps.userID) {
-    //   this.fetchData(this.props.userID);
-    // }
+    // 监听某个属性props发生变化，发送异步请求
+    if (this.props.title !== prevProps.title) {
+      // this.fetchData(this.props.title);
+    }
+
+    // 监听某个状态state发生变化，发送异步请求， 配合 static getDerivedStateFromProps 使用
+    if (this.state.Title !== prevState.Title) {
+      // this.fetchData(this.props.title);
+    }
   }
 
   // 装载:
@@ -86,6 +120,15 @@ class Demonstration extends React.Component {
         </ul>
       </div>
     );
+  }
+
+  // （装载完成），在render之后调用
+  // componentDidMount()紧跟在组件装载后（被插入树中）调用。可以立即调用setState()
+  componentDidMount() {
+    console.log('装载-[componentDidMount()]-4');
+    this.setState({
+      list: ['react', 'vue', 'ng'],
+    });
   }
 
   // 卸载

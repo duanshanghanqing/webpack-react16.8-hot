@@ -44,6 +44,7 @@ export default (props) => {
   useEffect(() => {
     console.log('null，componentDidMount[第一次渲染后] || componentDidUpdate[完成更新后]', count, props.number);
     return () => {
+      // 返回函数在新的 useEffect 执行之前被调用。先清理在执行
       console.log('null，componentWillUpdate[更新前] || componentWillUnmount[卸载前]', count, props.number);
     };
   });
