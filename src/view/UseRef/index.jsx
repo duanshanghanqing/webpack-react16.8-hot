@@ -30,21 +30,19 @@ export default function UseRef() {
 */
 
 // 第二个版本，ref在外部实现， 主要使用 forwardRef 方法传递 ref
-const FInput = forwardRef((props, ref) => {
-    return (
-        <input ref={ref} {...props} />
-    );
-});
+const FInput = forwardRef((props, ref) => (
+  <input ref={ref} {...props} />
+));
 
 export default function UseRef() {
-    const fInputRef = useRef();
-    useEffect(() => {
-        fInputRef.current.focus();
-        fInputRef.current.value = 'hello world';
-    }, []);
-    return (
-        <div>
-            <FInput ref={fInputRef} placeholder="请输入" />
-        </div>
-    );
-} 
+  const fInputRef = useRef();
+  useEffect(() => {
+    fInputRef.current.focus();
+    fInputRef.current.value = 'hello world';
+  }, []);
+  return (
+    <div>
+      <FInput ref={fInputRef} placeholder="请输入" />
+    </div>
+  );
+}
