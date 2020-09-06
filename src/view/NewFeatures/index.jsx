@@ -20,12 +20,16 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    this.numSetInterval = setInterval(() => {
       const { num } = this.state;
       this.setState({
         num: num + 1,
       });
     }, 500);
+  }
+  
+  componentWillUnmount() {
+    window.clearInterval(this.numSetInterval);
   }
 
   render() {
