@@ -9,7 +9,6 @@ import GetDerivedStateFromProps from './GetDerivedStateFromProps';
 //   <h4>{props.title}</h4>
 // ));
 
-
 export default class extends React.Component {
   constructor(props) {
     super(props);

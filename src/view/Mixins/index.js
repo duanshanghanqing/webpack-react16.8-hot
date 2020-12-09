@@ -30,5 +30,4 @@ class Mixins extends React.Component {
   }
 }
 
-
 export default Mixins;

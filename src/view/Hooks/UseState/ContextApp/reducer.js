@@ -17,7 +17,6 @@ function reducer(state, action) {
   }
 }
 
-
 export const myContext = React.createContext();
 
 // 函数式组件
@@ -30,7 +29,6 @@ export const ContextProvider = (props) => {
   // 参数三：生产初始化值的方法
   // 使用useReducer只要，只 state，dispatch 就可以了
   const [state, dispatch] = useReducer(reducer, initialCount, init);
-
 
   return (
     // 设置 state, dispatch, initialCount 参数作为 Context 值，向下传递

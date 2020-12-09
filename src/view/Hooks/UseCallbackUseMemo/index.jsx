@@ -4,7 +4,6 @@ import React, {
   useState, useEffect, useCallback, useMemo,
 } from 'react';
 
-
 export default function UseCallbackUseMemo() {
   const [count, setCount] = useState(0);
   const [otherCount, setOtherCount] = useState(0);
@@ -24,7 +23,6 @@ export default function UseCallbackUseMemo() {
     };
   }, []);
   console.log('更新...'); // 会一直打印，说明组件在一直渲染。
-
 
   // const handleClick = () => { // 每次这里都要从新定义一个方法，就很消耗内存和性能
   //     console.log(count); // 每次打印的都是最新的

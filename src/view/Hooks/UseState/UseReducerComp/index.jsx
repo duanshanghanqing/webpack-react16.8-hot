@@ -32,7 +32,6 @@ export default function (props) {
   // 实际应用中，可以从props传递过来
   const initData = { initialCount: 10, initUserInfo: { userName: '张三' } };
 
-
   // 参数一：reducer ，逻辑处理
   // 参数二：初始化值, 该值是第三个参数的传参
   // 参数三：生产初始化值的方法

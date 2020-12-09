@@ -24,7 +24,6 @@ export default (props) => {
     };
   }, [count]);// 代表能够引起副作用执行的依赖, 只有 count 变化才会触发副作用
 
-
   // 二：第二个参数有，并且是空数组。组件安装和卸载时触发，即 一次性 副作用
   // 适合做事件绑定和卸载，初始化请求服务端获取数据
   useEffect(() => {
@@ -37,7 +36,6 @@ export default (props) => {
     };
   }, []);
 
-
   // 三：没有第二个参数时，即全局副作用
   // 相当与监听全局的副作用，状态变化会触发,属性变化会触发，组件挂载卸载会触发
   // 业务里面最好不用
@@ -49,7 +47,6 @@ export default (props) => {
     };
   });
 
-
   return (
     <div>
       <div>
@@ -57,7 +54,6 @@ export default (props) => {
         {/* 状态变化只会被 全局副作用 监听 */}
         <button type="button" onClick={() => { setDisable(!disable); }}>{disable ? '启用' : '禁用'}</button>
       </div>
-
 
       <p>
         {' '}

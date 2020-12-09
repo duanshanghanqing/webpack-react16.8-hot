@@ -11,14 +11,12 @@ class Demonstration extends React.Component {
     };
   }
 
-
   // 16.0前的写法，过时不用
   // 将要装载，在render之前调用；
   // componentWillMount() {
   //   console.log('componentWillMount 将要装载，在render之前调用,可以在服务端被调用，也可以在浏览器端被调用；');
   // }
   // UNSAFE_componentWillMount()
-
 
   // 16.0前的写法，过时不用
   /*
@@ -144,7 +142,6 @@ Demonstration.defaultProps = {
 };
 
 export default Demonstration;
-
 
 /*
 ReactDOM 下的方法

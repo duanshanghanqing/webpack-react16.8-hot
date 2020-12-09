@@ -36,7 +36,6 @@ export default class extends React.Component {
         }
         <br />
 
-
         <h1 style={{ fontSize: 28 }}>useReducer 最佳实践</h1>
         <UseReducerComp />
         <br />
@@ -44,7 +43,6 @@ export default class extends React.Component {
         <h1 style={{ fontSize: 28 }}>useContext + useReducer 最佳实践</h1>
         <ContextApp />
         <br />
-
 
       </div>
     );
